@@ -1,0 +1,34 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.truncate2{
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient:vertical
+}
+.truncate3{
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-line-clamp:3;
+    -webkit-box-orient:vertical;
+}
+body{
+    background-color: #E2E8F0;
+}
+
+@keyframes bounce {
+    0%{
+        transform: none;
+    }
+    50%{
+        transform: translateY(10px);
+    }
+    100%{
+        transform: none;
+    }
+}
+.loginImg{
+    animation: bounce 2s linear infinite;
+}
