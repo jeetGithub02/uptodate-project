@@ -10,7 +10,7 @@ const Home = () => {
         axios.get(`http://127.0.0.1:5050/get-posts`)
         .then(response=>{
             console.log(response.data)
-           setAllPost(response.data)
+           setAllPost(response.data.reverse())
         })
     },[])
 

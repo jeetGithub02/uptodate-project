@@ -10,11 +10,11 @@ const Post = (props) => {
         <div ><Link to={`posts/${props.id}`}><img src={props.image} alt="post-image" className="aspect-video rounded-md " /></Link></div>
         <div className='my-2'>
             <h1 className='text-2xl  font-medium truncate2 leading-6 h-[51px]'>{props.title}</h1>
-            <p className="truncate3 leading-5">{props.body}</p>
+            <p className="truncate3 leading-5  h-[85px]">{props.description}</p>
         </div>
        <div className='flex items-center justify-between'> 
             <Link to={`/posts/${props.id}`} className='px-3 py-1 rounded-lg bg-sky-400 text-white'>View Post</Link>
-            <span className="italic">{moment(props.date,"YYYYMMDD").fromNow()}</span>
+            <span className="italic">{moment(props.date, "YYYYMMDD").fromNow()}</span>
         </div>
     </div>
   )

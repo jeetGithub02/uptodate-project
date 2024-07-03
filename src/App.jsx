@@ -7,6 +7,7 @@ import SinglePost from './pages/SinglePost'
 import MyPosts from './pages/MyPosts'
 import Login from './pages/Login'
 import Register from './pages/Register'
+import AddPost from './pages/AddPost'
 
 function App() {
 
@@ -20,6 +21,7 @@ function App() {
                 <Route path='my-posts' element={<MyPosts/>} />
                 {/* <Route path="new-post" element /> */}
                 <Route path='posts/:postId' element={<SinglePost/>} />
+                <Route path='add-post' element={<AddPost/>} />
             </Route>
         </Routes>
     </BrowserRouter>

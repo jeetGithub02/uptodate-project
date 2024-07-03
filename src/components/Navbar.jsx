@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
+import { useCookies } from 'react-cookie';
 import { Link, useNavigate } from 'react-router-dom'
 
 const Navbar = () => {
     let navigate = useNavigate();
+    const[cookies, setCookies, removeCookies]=useCookies();
     const[isShow, setIsShow]=useState(false)
     function dropdownShow(){
             setIsShow(!isShow);
@@ -10,7 +12,10 @@ const Navbar = () => {
 
     function handleLogin(e){
         if(e.target.id=="logout"){
-            setIsShow(!isShow)
+          removeCookies("user")
+            setIsShow(!isShow);
+            alert("Logged out successfully")
+            navigate("/");
         }else if(e.target.id=="login"){
             navigate("/login");
             setIsShow(!isShow)
@@ -20,23 +25,23 @@ const Navbar = () => {
   return (
     <header className="bg-slate-200/20 backdrop-blur-md sticky top-0">
             <div className="container flex items-center  gap-10 h-[55px]">
-                <div className='font-bold text-3xl'><Link to="/">UptoDate</Link></div>
+                <div className='font-bold md:text-3xl text-2xl text-sky-500'><Link to="/">UptoDate</Link></div>
                 <nav>
-                    <ul className="flex  gap-5 font-medium text-[18px]">
+                    <ul className="flex  gap-3 md:gap-5 font-medium text-[18px]">
                         <li>
                             <Link to='/'>Home</Link>
                         </li>
                         <li>
-                            <Link>Subscribed Posts</Link>
+                            <Link >Posts</Link>
                         </li>
                        
                         <li>
                             <div className="relative inline-block text-left">
                             <div>
                                 <button type="button" onClick={dropdownShow} className="inline-flex w-full justify-center"  id="menu-button" aria-expanded="true" aria-haspopup="true">
-                                Account
+                                {cookies.user ? cookies.user.name : "Account"}
                                 <svg className="text-black mt-1 h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                    <path fillRule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clipRule="evenodd" />
+                                  <path fillRule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clipRule="evenodd" />
                                 </svg>
                                 </button>
                             </div>
@@ -55,8 +60,10 @@ const Navbar = () => {
     <div className="py-1" role="none">
       {/* <!-- Active: "bg-gray-100 text-gray-900", Not Active: "text-gray-700" --> */}
       <Link onClick={()=>{setIsShow(!isShow)}} to="my-posts" className="block px-4 py-1  text-sm text-gray-700" role="menuitem" tabIndex="-1" id="menu-item-1" >My Posts</Link>
-      <button onClick={handleLogin}  className="block px-4 py-1  text-sm text-gray-700" role="menuitem" tabIndex="-1" id="login">Login</button>
-      <button onClick={handleLogin} className="block px-4 py-1 text-sm text-gray-700" role="menuitem" tabIndex="-1" id="logout">Logout</button>
+     {
+       (cookies.user) ?<button onClick={handleLogin} className="block px-4 py-1 text-sm text-gray-700" role="menuitem" tabIndex="-1" id="logout">Logout</button>
+       :<button onClick={handleLogin}  className="block px-4 py-1  text-sm text-gray-700" role="menuitem" tabIndex="-1" id="login">Login</button>
+     }
      
     </div>
   </div>

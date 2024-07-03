@@ -23,12 +23,12 @@ body{
         transform: none;
     }
     50%{
-        transform: translateY(10px);
+        transform: translateY(15px);
     }
     100%{
         transform: none;
     }
 }
 .loginImg{
-    animation: bounce 2s linear infinite;
+    animation: bounce 2s ease-in-out infinite;
 }
