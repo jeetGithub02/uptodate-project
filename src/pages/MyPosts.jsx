@@ -7,17 +7,32 @@ import { useCookies } from 'react-cookie';
 
 const MyPosts = () => {
   const[cookies, setCookies, removeCookies]=useCookies();
-  const[myPosts, setMyPost]=useState([]);
+  const[isDeleted, setIsDeleted]=useState(false)
+  const[myPosts, setMyPosts]=useState([]);
   const navigate= useNavigate()
 
   const addTask =()=>{
       navigate('/add-post')
   }
 
+  const handleDeletePost = (title, postId)=>{
+    let flag = window.confirm(`Are you sure to delete this post? \n${title}`)
+    if(flag){
+        axios.delete(`http://127.0.0.1:5050/delete-post/${postId}`).then(res=>{
+          alert(res.data)
+          setMyPosts(pre=> pre.filter(post=> post.id !== postId))
+          
+        })
+      
+    }else{
+    }
+}
+
+
   useEffect(()=>{
      if(cookies.user){
          axios.get(`http://127.0.0.1:5050/get-posts/${cookies.user.userId}`).then(res=>{
-        setMyPost(res.data);
+        setMyPosts(res.data);
       })
      }else{
         navigate("/login")
@@ -47,7 +62,7 @@ const MyPosts = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 my-4">
               {
                 myPosts.map(post=>
-                 <MyPost key={post.id} {...post} />
+                 <MyPost key={post.id} {...post} handleDelete={handleDeletePost} />
                 )
               }
           </div>

@@ -23,7 +23,7 @@ const Navbar = () => {
 
     }
   return (
-    <header className="bg-slate-200/20 backdrop-blur-md sticky top-0">
+    <header className="bg-slate-200/20 backdrop-blur-md sticky top-0 ">
             <div className="container flex items-center  gap-10 h-[55px]">
                 <div className='font-bold md:text-3xl text-2xl text-sky-500'><Link to="/">UptoDate</Link></div>
                 <nav>
